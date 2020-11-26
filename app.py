@@ -6,6 +6,7 @@ sched = BlockingScheduler()
 
 from datetime import datetime
 from flask import Flask
+
 app = Flask(__name__)
 
     
@@ -36,9 +37,9 @@ def noti2():
 
     
 if __name__ == '__main__':
+    app.run(port=200,use_reloader=False)
     
-    app.run()
-    start_screener()
-    start_screener_all()
-    sched.start()
+    # start_screener()
+    # start_screener_all()
+    # sched.start()
     
