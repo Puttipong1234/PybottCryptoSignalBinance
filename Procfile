@@ -1,1 +1,1 @@
-clock: python clock.py
+runbot: python runbot.py
