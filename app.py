@@ -34,10 +34,6 @@ def noti2():
     start_screener_all()
     return "200"
 
-
-
-
-
     
 if __name__ == '__main__':
     

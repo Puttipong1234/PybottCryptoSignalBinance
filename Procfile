@@ -1,2 +1,2 @@
-web: gunicorn app:runbot
-runbot: python runbot.py
+web: gunicorn app:app
+runbot: python app.py
