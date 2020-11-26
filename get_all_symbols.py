@@ -31,9 +31,7 @@ def start_screener_all():
     r = requests.post(url, headers=headers, data = {'message':"SCREEN ALL 4H"})
     
     lookup = {}
-    all_holding_list = get_all_holding_bnb()
     # load data
-    i = 5
     for key,val in bnb.fetch_tickers().items():
         # if i < 0:
         #     break
@@ -41,6 +39,8 @@ def start_screener_all():
             lookup[key] = val
             lookup[key]["Status"] = "START"
             lookup[key]["Total"] = 0
+            lookup[key]["Change"] = val["info"]["priceChangePercent"]
+            lookup[key]["lastPrice"] = val["info"]["lastPrice"]
     
     
     # for i in lookup:
@@ -56,8 +56,8 @@ def start_screener_all():
     
         res = bnb.fetch_ohlcv(key,timeframe='1d',limit=500)
         
-        # updated_status , profit = run_bot_trade(res=res,name=key,status=val["Status"],amount=val["Total"])
-        updated_status , profit = run_bot_trade_only_buy(res=res,name=key,status=val["Status"],amount=val["Total"])
+        # updated_status , profit = run_bot_trade(res=res,name=key,status=val["Status"],amount=val["Total"],Change=val["Change"],lastPrice=val["lastPrice"])
+        updated_status , profit = run_bot_trade_only_buy(res=res,name=key,status=val["Status"],amount=val["Total"],Change=val["Change"],lastPrice=val["lastPrice"])
         
         val["Status"] = updated_status
 
@@ -103,6 +103,8 @@ def start_screener():
                 lookup_holding[key] = {
                     "Status":"START",
                     "Total":i["val"],
+                    "Change":i["Change"],
+                    "lastPrice":i["lastPrice"]
                 }
         
     print(lookup_holding)
@@ -110,8 +112,8 @@ def start_screener():
     
         res = bnb.fetch_ohlcv(key,timeframe='4h',limit=500)
         
-        updated_status , profit = run_bot_trade(res=res,name=key,status=val["Status"],amount=val["Total"])
-        # updated_status , profit = run_bot_trade_only_buy(res=res,name=key,status=val["Status"],amount=val["Total"])
+        updated_status , profit = run_bot_trade(res=res,name=key,status=val["Status"],amount=val["Total"],Change=val["Change"],lastPrice=val["lastPrice"])
+        # updated_status , profit = run_bot_trade_only_buy(res=res,name=key,status=val["Status"],amount=val["Total"],Change=val["Change"],lastPrice=val["lastPrice"])
         
         val["Status"] = updated_status
 

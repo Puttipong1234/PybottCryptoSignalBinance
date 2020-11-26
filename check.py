@@ -14,7 +14,7 @@ headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'B
     
 # r = requests.post(url, headers=headers, data = {'message':"สั่งซื้อ BTC ไปที่ราคา {} จำนวน {}".format(boughtprice , totalamount) })
 
-def run_bot_trade(res,name,status,amount):
+def run_bot_trade(res,name,status,Change,amount,lastPrice):
     prof = 0
     current_status = status
     df = pd.DataFrame(res,columns =['date', 'open', 'high', 'low', 'close', 'volume'])
@@ -78,7 +78,7 @@ def run_bot_trade(res,name,status,amount):
         if Sht[-1] > Mid[-1] and Sht[-2] < Mid[-2] and closes[-1] > Sht[-1]:
             buylong = True
             if current_status != "BUY NOW":
-                r = requests.post(url, headers=headers, data = {'message':"💰💰{} \n🟢🟢BUY NOW \n Close : 💲💲{} \n ".format(name,closes[-1])})
+                r = requests.post(url, headers=headers, data = {'message':"💰💰{} \n🟩🟩BUY NOW \n 🚼🚼Change : {}% \n 💲💲Close : {} \n ".format(name,Change,closes[-1])})
                 print("BUY NOW")
                 current_status = "BUY NOW"
                 prof = closes[-1]
@@ -92,7 +92,7 @@ def run_bot_trade(res,name,status,amount):
         elif ( Sht[-2] > Lng[-2] and Sht[-1] < Lng[-1] ) or closes[-1] < Lng[-1]:
             sellshort = True
             if current_status != "SELL NOW":
-                r = requests.post(url, headers=headers, data = {'message':"\n💰💰{} \n🔴🔴SELL NOW \n Close : 💲💲{} \n ".format(name,closes[-1])})
+                r = requests.post(url, headers=headers, data = {'message':"\n💰💰{} \n🟥🟥SELL NOW \n 🚼🚼Change : {}% \n 💲💲Close : {} \n ".format(name,Change,closes[-1])})
                 print("SELL NOW")
                 current_status = "SELL NOW"
                 prof = amount - closes[-1]
@@ -102,7 +102,7 @@ def run_bot_trade(res,name,status,amount):
             # run nitify
         
         else:
-            r = requests.post(url, headers=headers, data = {'message':"\n💰💰{} \n🦵🦵NO ACTION NOW ! \n Close : 💲💲{} \n ".format(name,closes[-1])})
+            r = requests.post(url, headers=headers, data = {'message':"\n💰💰{} \n🦵🦵NO ACTION NOW ! \n 💲💲Close : {} \n ".format(name,closes[-1])})
         
         return current_status , prof
 
@@ -117,7 +117,7 @@ def run_bot_trade(res,name,status,amount):
     
 # r = requests.post(url, headers=headers, data = {'message':"สั่งซื้อ BTC ไปที่ราคา {} จำนวน {}".format(boughtprice , totalamount) })
 
-def run_bot_trade_only_buy(res,name,status,amount):
+def run_bot_trade_only_buy(res,name,Change,status,amount,lastPrice):
     prof = 0
     current_status = status
     df = pd.DataFrame(res,columns =['date', 'open', 'high', 'low', 'close', 'volume'])
@@ -181,7 +181,7 @@ def run_bot_trade_only_buy(res,name,status,amount):
         if Sht[-1] > Mid[-1] and Sht[-2] < Mid[-2] and closes[-1] > Sht[-1]:
             buylong = True
             if current_status != "BUY NOW":
-                r = requests.post(url, headers=headers, data = {'message':"💰💰{} \n🟢🟢BUY NOW \n Close : 💲💲{} \n ".format(name,closes[-1])})
+                r = requests.post(url, headers=headers, data = {'message':"💰💰{} \n🟩🟩BUY NOW \n 🚼🚼Change : {}% \n 💲💲Close : {} \n ".format(name,Change,closes[-1])})
                 print("BUY NOW")
                 current_status = "BUY NOW"
                 prof = closes[-1]
@@ -195,7 +195,7 @@ def run_bot_trade_only_buy(res,name,status,amount):
         elif ( Sht[-2] > Lng[-2] and Sht[-1] < Lng[-1] ) or closes[-1] < Lng[-1]:
             sellshort = True
             if current_status != "SELL NOW":
-                # r = requests.post(url, headers=headers, data = {'message':"{} \nSELL NOW \n Close : {} \n ".format(name,closes[-1])})
+                # r = requests.post(url, headers=headers, data = {'message':"{} \nSELL NOW \n 🚼🚼Change : {} Close : {} \n ".format(name,clChange,oses[-1])})
                 print("SELL NOW")
                 current_status = "SELL NOW"
                 prof = amount - closes[-1]
