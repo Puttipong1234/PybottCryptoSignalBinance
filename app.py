@@ -5,7 +5,7 @@ from get_all_symbols import start_screener , start_screener_all
 sched = BlockingScheduler()
 #test
 from datetime import datetime
-from flask import Flask
+from flask import Flask , render_template
 
 app = Flask(__name__)
 
@@ -23,19 +23,29 @@ def timed_job():
     print('This job is run every three minutes. หลอก heroku')
     
 
+
+@app.route("/")
+def home():
+    return render_template('homepage.html')
+
 @app.route("/start_screener")
 def noti1():
-    start_screener()
-    return "200"
+    res = start_screener()
+    return render_template('buying.html',res = res )
+
+@app.route("/start_screener/watch_list")
+def noti1_1():
+    res = start_screener()
+    return res
 
 @app.route("/start_screener_all")
 def noti2():
-    start_screener_all()
-    return "200"
+    res = start_screener_all()
+    return res
 
     
 if __name__ == '__main__':
-    app.run(port=200,use_reloader=False)
+    app.run(port=200,use_reloader=False,debug=True)
     
     # start_screener()
     # start_screener_all()

@@ -64,7 +64,7 @@ def start_screener_all():
     
     
     # r = requests.post(url, headers=headers, data = {'message':"INVEST PROFIT{} \n \n ".format(total_profit)})
-
+    return lookup_holding
 
 
 def start_screener():
@@ -117,7 +117,7 @@ def start_screener():
         
         val["Status"] = updated_status
 
-    
+    return lookup_holding
     
     # r = requests.post(url, headers=headers, data = {'message':"INVEST PROFIT{} \n \n ".format(total_profit)})
 
