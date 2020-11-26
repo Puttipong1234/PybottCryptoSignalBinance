@@ -3,13 +3,11 @@ import requests
 from get_all_symbols import start_screener , start_screener_all
 
 sched = BlockingScheduler()
-
+#test
 from datetime import datetime
 from flask import Flask
 
 app = Flask(__name__)
-
-    
 
 
 @sched.scheduled_job('interval', hours=4)
