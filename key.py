@@ -1,0 +1,5 @@
+apiKey = "rLrYaF-aO35pmp24hKidPfObTJZMVRJdTfSlEcvp"
+apiSecret = "LjoXdlnASYzFTwABy8xcOH_5q6EdnCVT3ktMzX8C"
+
+bnbapiKey = "rFvk1tdjzcNcUmpk8ubPytrNzLauiFd2RuUiplO44U1R9GQbCOiMl3SqeXuUmI2G"
+bnbapiSecret = "thgioJQKDEcie8pukHclG05RDkCoCbdzmkGwuXsXLR4Y7ZY8vNOZzSf3ztfrOUWe"
