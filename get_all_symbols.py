@@ -61,7 +61,7 @@ def start_screener_all():
         
         val["Status"] = updated_status
 
-    
+    print(lookup_holding)
     
     # r = requests.post(url, headers=headers, data = {'message':"INVEST PROFIT{} \n \n ".format(total_profit)})
     return lookup_holding

@@ -31,7 +31,7 @@ def home():
 @app.route("/start_screener")
 def noti1():
     res = start_screener()
-    return render_template('buying.html',res = res )
+    return render_template('asset.html',res = res )
 
 @app.route("/start_screener/watch_list")
 def noti1_1():
@@ -40,6 +40,11 @@ def noti1_1():
 
 @app.route("/start_screener_all")
 def noti2():
+    res = start_screener_all()
+    return render_template('buying.html',res = res )
+
+@app.route("/start_screener_all/watch_list")
+def noti2_2():
     res = start_screener_all()
     return res
 

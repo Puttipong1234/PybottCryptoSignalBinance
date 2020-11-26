@@ -9,12 +9,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.3.17/vuetify.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.3.17/vuetify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <style>
+
+        body {
+            font-family: 'Nerko One', cursive;
+        }
+
         nav {
             z-index: 10000;
         }
@@ -24,8 +31,7 @@
         }
 
         .container-list{
-            margin-left: 50px;
-            margin-right: 50px;
+            margin: 20px;
         }
 
         .btn-container{
@@ -34,8 +40,10 @@
         }
 
         .table-container{
+            overflow-y: auto;
+            height: 60vh;
             margin: auto;
-            padding: auto;
+            padding: 30px 60px 30px 60px;
         }
     </style>
     {% endblock %}
@@ -43,18 +51,21 @@
 <body>
     <nav>
         <div class="nav-wrapper" style="background-color:black;height:100px">
-          <a href="#" class="brand-logo right" style="margin-right: 30px;">EZ4H SIGNALS</a>
+          <a href="#" class="brand-logo right" style="margin-right: 30px;" href="/">EZ4H SIGNALS</a>
           <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li><a style="font-size: larger;" href="/">Home</a></li>
             <li><a style="font-size: larger;" href="/start_screener">YOUR HOLDING</a></li>
             <li><a style="font-size: larger;" href="/start_screener_all">BUYING SIGNAL</a></li>
             <li><a style="font-size: larger;" href="collapsible.html">ABOUT</a></li>
           </ul>
         </div>
       </nav>
-    <div style="height:100vh;width:100vw">
+    <div style="height:50px"></div>
+    <div style="height:100vh;width:80vw;margin:auto">
         {% block body %}
         {% endblock %}
     </div>
    
 </body>
 </html>
+

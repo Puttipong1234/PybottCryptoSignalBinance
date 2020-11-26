@@ -143,7 +143,11 @@ def run_bot_trade_only_buy(res,name,Change,status,amount,lastPrice):
 
 
     sm = 2*p5/10
-    atr = ta.ATR(highs, lows, closes, timeperiod=p4)
+    atr = ""
+    try:
+        atr = ta.ATR(highs, lows, closes, timeperiod=p4)
+    except :
+        return "FAIL" , 0
 
     ARTX = sm*atr
 
