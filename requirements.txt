@@ -38,7 +38,6 @@ requests==2.25.0
 schedule==0.6.0
 service-identity==18.1.0
 six==1.15.0
-TA-Lib==0.4.19
 Twisted==20.3.0
 txaio==20.4.1
 typing==3.7.4.3
