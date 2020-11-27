@@ -32,9 +32,9 @@ def run_bot_trade(res,name,status,Change,amount,lastPrice):
     closes = closes['close'].to_numpy()
     pre_closes = pre_closes['close'].to_numpy()
 
-    p1 = 9
-    p2 = 15
-    p3 = 24
+    p1 = 10
+    p2 = 20
+    p3 = 30
     p4 = 5
     p5 = 5
 

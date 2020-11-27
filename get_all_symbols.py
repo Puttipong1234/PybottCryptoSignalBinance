@@ -49,7 +49,7 @@ def start_screener_all():
     
     for key,val in lookup_holding.items():
     
-        res = bnb.fetch_ohlcv(key,timeframe='1d',limit=20)
+        res = bnb.fetch_ohlcv(key,timeframe='1d',limit=50)
         
         # updated_status , profit = run_bot_trade(res=res,name=key,status=val["Status"],amount=val["Total"],Change=val["Change"],lastPrice=val["lastPrice"])
         updated_status , profit = run_bot_trade_only_buy(res=res,name=key,status=val["Status"],amount=val["Total"],Change=val["Change"],lastPrice=val["lastPrice"])
