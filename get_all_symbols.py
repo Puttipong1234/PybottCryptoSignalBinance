@@ -37,20 +37,15 @@ def start_screener_all():
         #     break
         if ("USDT" in key) or ("BTC" in key):
             lookup[key] = val
-            lookup[key]["Status"] = "START"
+            lookup[key]["Status"] = "NO ACTION"
             lookup[key]["Total"] = 0
             lookup[key]["Change"] = val["info"]["priceChangePercent"]
             lookup[key]["lastPrice"] = val["info"]["lastPrice"]
     
     
-    # for i in lookup:
-    #     res = bnb.fetch_ohlcv(i["name"],timeframe=tf,limit=n)
-    #     updated_status , profit = run_bot_trade(res=res,name=i["name"],status=i["Status"],amount=1)
-    #     i["Status"] = updated_status
-    #     i["Total"] = i["Total"] + profit
-    # time.sleep(60*15)
-    # print("------------------")
     lookup_holding = lookup
+    
+    signals_lookup = {}
     
     for key,val in lookup_holding.items():
     
@@ -60,11 +55,15 @@ def start_screener_all():
         updated_status , profit = run_bot_trade_only_buy(res=res,name=key,status=val["Status"],amount=val["Total"],Change=val["Change"],lastPrice=val["lastPrice"])
         
         val["Status"] = updated_status
+        if updated_status == "BUY NOW" or updated_status == "SELL NOW":
+            signals_lookup[key] = val
+            val["TV_Link"] = "https://www.tradingview.com/symbols/{}/".format(key.split("/")[0] + key.split("/")[1])
+            val["BNB_Link"] = "https://www.binance.com/en/trade/{}".format(key.split("/")[0] +"_"+ key.split("/")[1])
+        #https://www.tradingview.com/symbols/BTCUSD/
 
-    print(lookup_holding)
     
     # r = requests.post(url, headers=headers, data = {'message':"INVEST PROFIT{} \n \n ".format(total_profit)})
-    return lookup_holding
+    return signals_lookup
 
 
 def start_screener():
@@ -82,7 +81,7 @@ def start_screener():
         #     break
         if ("USDT" in key) or ("BTC" in key):
             lookup[key] = val
-            lookup[key]["Status"] = "START"
+            lookup[key]["Status"] = "NO ACTION"
             lookup[key]["Total"] = 0
     
     
@@ -101,13 +100,12 @@ def start_screener():
         for i in all_holding_list:
             if i["name"] in key.split("/")[0]: # "BTC" compare to "BTC/USDT"
                 lookup_holding[key] = {
-                    "Status":"START",
+                    "Status":"NO ACTION",
                     "Total":i["val"],
                     "Change":i["Change"],
                     "lastPrice":i["lastPrice"]
                 }
         
-    print(lookup_holding)
     for key,val in lookup_holding.items():
     
         res = bnb.fetch_ohlcv(key,timeframe='4h',limit=500)
@@ -116,6 +114,8 @@ def start_screener():
         # updated_status , profit = run_bot_trade_only_buy(res=res,name=key,status=val["Status"],amount=val["Total"],Change=val["Change"],lastPrice=val["lastPrice"])
         
         val["Status"] = updated_status
+        val["TV_Link"] = "https://www.tradingview.com/symbols/{}/".format(key.split("/")[0] + key.split("/")[1])
+        val["BNB_Link"] = "https://www.binance.com/en/trade/{}".format(key.split("/")[0] +"_"+ key.split("/")[1])
 
     return lookup_holding
     

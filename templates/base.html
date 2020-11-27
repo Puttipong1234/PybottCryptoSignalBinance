@@ -20,6 +20,7 @@
 
         body {
             font-family: 'Nerko One', cursive;
+            font-size: 1.6rem;
         }
 
         nav {
@@ -53,7 +54,7 @@
         <div class="nav-wrapper" style="background-color:black;height:100px">
           <a href="#" class="brand-logo right" style="margin-right: 30px;" href="/">EZ4H SIGNALS</a>
           <ul id="nav-mobile" class="left hide-on-med-and-down">
-            <li><a style="font-size: larger;" href="/">Home</a></li>
+            <li><a style="font-size: larger;" href="/">HOME</a></li>
             <li><a style="font-size: larger;" href="/start_screener">YOUR HOLDING</a></li>
             <li><a style="font-size: larger;" href="/start_screener_all">BUYING SIGNAL</a></li>
             <li><a style="font-size: larger;" href="collapsible.html">ABOUT</a></li>
@@ -67,5 +68,14 @@
     </div>
    
 </body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3"></script>
+<link href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css" rel="stylesheet">
+<script>
+    Vue.use(VueLoading);
+    Vue.component('loading', VueLoading)
+</script> 
+{% block script%}
+{% endblock %}
 </html>
 
