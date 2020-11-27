@@ -16,5 +16,3 @@ def get_all_holding_bnb():
                     holding.append({"name":i["asset"],"val":i["free"],"Change":j["priceChangePercent"],"lastPrice":j["lastPrice"]})
     
     return holding
-
-print(get_all_holding_bnb())
