@@ -5,7 +5,7 @@ from get_all_symbols import start_screener , start_screener_all
 sched = BlockingScheduler()
 #test
 from datetime import datetime
-from flask import Flask , render_template , redirect, url_for, request
+from flask import Flask , render_template , redirect, url_for, request , jsonify , make_response
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -48,7 +48,9 @@ def noti2():
 
 @app.route("/start_screener_all/watch_list")
 def noti2_2():
-    res = start_screener_all()
+    if request.args.get('next_index'):
+        next_index = request.args.get('next_index')
+        res , current_index = start_screener_all(int(next_index))        
     return res
 
 

@@ -12,10 +12,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nerko+One&display=swap" rel="stylesheet">
 
+  
+    
+    
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/2.3.17/vuetify.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://unpkg.com/vuejs-paginate@latest"></script>
+    <!-- or use the specify version -->
+    <script src="https://unpkg.com/vuejs-paginate@0.9.0"></script>
     <style>
 
         body {
@@ -46,6 +52,11 @@
             margin: auto;
             padding: 30px 60px 30px 60px;
         }
+
+        .d-flex{
+            display: flex;
+            flex-direction: row;
+        }
     </style>
     {% endblock %}
 </head>
@@ -74,6 +85,7 @@
 <script>
     Vue.use(VueLoading);
     Vue.component('loading', VueLoading)
+    Vue.component('paginate', VuejsPaginate)
 </script> 
 {% block script%}
 {% endblock %}

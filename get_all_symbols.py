@@ -6,7 +6,7 @@ import math
 import time
 import csv
 import schedule
-
+import itertools
 
 bnb = ccxt.binance({
     'api_key': bnbapiKey, # API Keys
@@ -26,16 +26,19 @@ headers = {'content-type':'application/x-www-form-urlencoded','Authorization':'B
 
 
 
-def start_screener_all():
+def start_screener_all(next_index): #1-4
     
     r = requests.post(url, headers=headers, data = {'message':"SCREEN ALL 4H"})
     
     lookup = {}
     # load data
-    for key,val in bnb.fetch_tickers().items():
+    current_index = next_index
+    data = dict(itertools.islice(bnb.fetch_tickers().items(), next_index*130 ,(next_index*130) + 130,1))
+    for key,val in data.items():
         # if i < 0:
         #     break
         if ("USDT" in key) or ("BTC" in key):
+            print(key)
             lookup[key] = val
             lookup[key]["Status"] = "NO ACTION"
             lookup[key]["Total"] = 0
@@ -47,7 +50,10 @@ def start_screener_all():
     
     signals_lookup = {}
     
-    for key,val in lookup_holding.items():
+    
+    found = 0
+    
+    for key,val in lookup_holding.items(): # 0-10
     
         res = bnb.fetch_ohlcv(key,timeframe='1d',limit=50)
         
@@ -55,15 +61,18 @@ def start_screener_all():
         updated_status , profit = run_bot_trade_only_buy(res=res,name=key,status=val["Status"],amount=val["Total"],Change=val["Change"],lastPrice=val["lastPrice"])
         
         val["Status"] = updated_status
-        if updated_status == "BUY NOW" or updated_status == "SELL NOW":
+        # if updated_status == "BUY NOW":
+        if True:
+            print(key)
             signals_lookup[key] = val
             val["TV_Link"] = "https://www.tradingview.com/symbols/{}/".format(key.split("/")[0] + key.split("/")[1])
             val["BNB_Link"] = "https://www.binance.com/en/trade/{}".format(key.split("/")[0] +"_"+ key.split("/")[1])
-        #https://www.tradingview.com/symbols/BTCUSD/
-
-    
+            found = found + 1
+        
+        current_index = current_index + 1
+        #https://www.tradingview.com/symbols/BTCUSD/    
     # r = requests.post(url, headers=headers, data = {'message':"INVEST PROFIT{} \n \n ".format(total_profit)})
-    return signals_lookup
+    return signals_lookup , current_index
 
 
 def start_screener():
@@ -108,7 +117,7 @@ def start_screener():
         
     for key,val in lookup_holding.items():
     
-        res = bnb.fetch_ohlcv(key,timeframe='4h',limit=20)
+        res = bnb.fetch_ohlcv(key,timeframe='1d',limit=20)
         
         updated_status , profit = run_bot_trade(res=res,name=key,status=val["Status"],amount=val["Total"],Change=val["Change"],lastPrice=val["lastPrice"])
         # updated_status , profit = run_bot_trade_only_buy(res=res,name=key,status=val["Status"],amount=val["Total"],Change=val["Change"],lastPrice=val["lastPrice"])

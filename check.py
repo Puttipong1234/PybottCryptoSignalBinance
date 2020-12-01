@@ -93,7 +93,7 @@ def run_bot_trade(res,name,status,Change,amount,lastPrice):
             sellshort = True
             if current_status != "SELL NOW":
                 # r = requests.post(url, headers=headers, data = {'message':"\n💰💰{} \n🟥🟥SELL NOW \n 🚼🚼Change : {}% \n 💲💲Close : {} \n ".format(name,Change,closes[-1])})
-                print("SELL NOW")
+                # print("SELL NOW")
                 current_status = "SELL NOW"
                 prof = amount - closes[-1]
             else:
@@ -174,10 +174,10 @@ def run_bot_trade_only_buy(res,name,Change,status,amount,lastPrice):
         buylong = False
         sellshort = False
 
-        print(Sht[-1] > Mid[-1] and Sht[-2] < Mid[-2] and closes[-1] > Sht[-1])
-        print(( Sht[-2] > Lng[-2] and Sht[-1] < Lng[-1] ) or closes[-1] < Lng[-1])
-        print(( Sht[-2] , Lng[-2] , Sht[-1] , Lng[-1] ))
-        print(closes[-1])
+        # print(Sht[-1] > Mid[-1] and Sht[-2] < Mid[-2] and closes[-1] > Sht[-1])
+        # print(( Sht[-2] > Lng[-2] and Sht[-1] < Lng[-1] ) or closes[-1] < Lng[-1])
+        # print(( Sht[-2] , Lng[-2] , Sht[-1] , Lng[-1] ))
+        # print(closes[-1])
         # print(boughtprice > closes[-1])
         # print(boughtprice < closes[-1])
         
@@ -200,7 +200,7 @@ def run_bot_trade_only_buy(res,name,Change,status,amount,lastPrice):
             sellshort = True
             if current_status != "SELL NOW":
                 # # r = requests.post(url, headers=headers, data = {'message':"{} \nSELL NOW \n 🚼🚼Change : {} Close : {} \n ".format(name,clChange,oses[-1])})
-                print("SELL NOW")
+                # print("SELL NOW")
                 current_status = "SELL NOW"
                 prof = amount - closes[-1]
             else:
