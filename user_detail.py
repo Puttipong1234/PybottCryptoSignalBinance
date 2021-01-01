@@ -45,7 +45,7 @@ def get_holding_performance():
                     "val":i["free"],
                     "result": btc_dif * btc_price,
                     "Status": stat,
-                    "Percentage": percent
+                    "Percentage": (round(percent, 2))
                 }
 
                 result.append(this_res)
