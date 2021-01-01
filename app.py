@@ -1,6 +1,7 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
 import requests
 from get_all_symbols import start_screener , start_screener_all
+from user_detail import get_holding_performance
 
 sched = BlockingScheduler()
 #test
@@ -36,6 +37,11 @@ def noti1():
     # res = start_screener()
     return render_template('asset.html')
 
+@app.route("/result")
+def result_page():
+    # res = start_screener()
+    return render_template('investResult.html')
+
 @app.route("/start_screener/watch_list")
 def noti1_1():
     res = start_screener()
@@ -53,6 +59,12 @@ def noti2_2():
         res , current_index = start_screener_all(int(next_index))        
     return res
 
+
+@app.route("/result_Performance")
+def result():
+    res = get_holding_performance()
+    res = jsonify(res)
+    return make_response(res)
 
 
 if __name__ == '__main__':
