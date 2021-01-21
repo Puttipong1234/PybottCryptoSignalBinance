@@ -24,44 +24,68 @@ def get_holding_performance():
 
     for i in client.get_account()["balances"]:
 
-        if i["free"] != "0.00000000" and i["asset"] != "USDT":
+        pair_name_usdt= i["asset"] + 'USDT'
+        chk = 0
+        try :
+            chk = float(client.get_symbol_ticker(symbol=pair_name_usdt)["price"]) * float(i["free"])
+        except:
+            chk = 0
 
-            pair_name= i["asset"] + 'BTC'
-            print(pair_name)
-            
+
+        if i["free"] != "0.00000000" and i["asset"] != "USDT" and chk > 8 :
+
+            print(pair_name_usdt)
             try:
-                trades_buy = client.get_my_trades(symbol=pair_name)
-                trades = client.get_historical_trades(symbol=pair_name)
-                btc_dif = float(trades[0]["price"]) - float(trades_buy[0]["price"])
-                btc_price = float(client.get_historical_trades(symbol='BTCUSDT')[0]["price"])
-                percent = (btc_dif/float(trades_buy[0]["price"]))*100
+                trades_buy = client.get_my_trades(symbol=pair_name_usdt)
+                # trades = client.get_historical_trades(symbol=pair_name)
+                trades = client.get_symbol_ticker(symbol=pair_name_usdt)
+                my_total_dif = 0
+                total_qty = 0
+                for i in trades_buy:
+                    my_total_dif += float(i["price"])*float(i["qty"])
+                    total_qty += float(i["qty"])
+
+                prof_dif = total_qty*float(trades["price"]) - my_total_dif
+                percent = ((total_qty*float(trades["price"]) - my_total_dif))*100/(total_qty*float(trades["price"])
 
                 stat = "ขาดทุน"
-                if btc_dif * btc_price > 0:
+                if prof_dif > 0:
                     stat = "กำไร"
 
                 this_res = {
                     "name":i["asset"],
                     "val":i["free"],
-                    "result": btc_dif * btc_price,
+                    "result": prof_dif,
                     "Status": stat,
                     "Percentage": (round(percent, 2))
                 }
 
                 result.append(this_res)
 
-            except:
+            except :
                 pass
 
 
     result.append(this_res)
 
-    print(result)
+    if this_res == []:
+        this_res = {
+                    "name":0,
+                    "val":0,
+                    "result": 0,
+                    "Status": 0,
+                    "Percentage": 0
+                }
+
 
     return result
 
 
+
+
 if __name__ == "__main__":
-    get_holding_performance()
+    # get_holding_performance()
     # trades_buy = client.get_my_trades(symbol="ICXBTC")
     # print(trades_buy)
+    # get_holding_performance()
+
