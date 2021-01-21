@@ -46,7 +46,7 @@ def get_holding_performance():
                     total_qty += float(i["qty"])
 
                 prof_dif = total_qty*float(trades["price"]) - my_total_dif
-                percent = ((total_qty*float(trades["price"]) - my_total_dif))*100/(total_qty*float(trades["price"])
+                percent = ((total_qty*float(trades["price"]) - my_total_dif))*100/(total_qty*float(trades["price"]))
 
                 stat = "ขาดทุน"
                 if prof_dif > 0:
@@ -66,9 +66,9 @@ def get_holding_performance():
                 pass
 
 
-    result.append(this_res)
+    # result.append(this_res)
 
-    if this_res == []:
+    if result == []:
         this_res = {
                     "name":0,
                     "val":0,
@@ -76,7 +76,7 @@ def get_holding_performance():
                     "Status": 0,
                     "Percentage": 0
                 }
-
+        result.append(this_res)
 
     return result
 
@@ -87,5 +87,5 @@ if __name__ == "__main__":
     # get_holding_performance()
     # trades_buy = client.get_my_trades(symbol="ICXBTC")
     # print(trades_buy)
-    # get_holding_performance()
+    get_holding_performance()
 
