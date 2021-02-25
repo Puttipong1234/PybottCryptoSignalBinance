@@ -50,6 +50,9 @@ wheels/
 pip-log.txt 
 pip-delete-this-directory.txt 
 
+#api key
+key_prod.py
+
 # Unit test / coverage reports 
 htmlcov/ 
 .tox/ 
