@@ -1,13 +1,13 @@
 # PybottCryptoSignalBinance
 PybottCryptoSignalBinance
 
-##DEVELOPEMENT PURPOSE
+## DEVELOPEMENT PURPOSE
 - python -m venv venv
 - venv\Scripts\activate (To activate virtual environment)
 - pip install -r requirements.txt
 - python app.py
 
-##PRODUCTION PURPOSE
+## PRODUCTION PURPOSE
 - git init
 - git add .
 - git commit -m "add first issue"
@@ -15,5 +15,9 @@ PybottCryptoSignalBinance
 - heroku create
 - git push heroku master
 
-##PRODUCTION LOG
+## ADD BUILDPACK TO HEROKU & ENV VARIABLE 
+- heroku buildpacks:add --index 1 heroku/python
+- heroku buildpacks:add --index 2 https://github.com/numrut/heroku-buildpack-python-talib
+
+## PRODUCTION LOG
 - heroku logs --tail
